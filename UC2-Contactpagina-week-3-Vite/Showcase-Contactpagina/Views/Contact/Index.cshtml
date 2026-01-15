@@ -41,22 +41,42 @@
 
 
 <script>
+    const inputFirstName = document.getElementById('firstname')
+    const inputLastName = document.getElementById('lastname')
     const inputEmail = document.getElementById('email');
+    const inputPhone = document.getElementById('phone')
 
+    const validateFirstName = () => {
+       if (inputFirstName.validity.length > 60) {
+           inputFirstName.setCustomValidity("Voornaam mag niet langer dan 60 tekens zijn!");
+       } else 
+           inputFirstName.setCustomValidity("");
+    }
+
+    const validateLastName = () => {
+        //todo
+    }
 
     const validateEmail = () => { 
         if (inputEmail.validity.typeMismatch) {
             inputEmail.setCustomValidity("Voer een geldig e-mailadres in!");
             inputEmail.reportValidity();
         } else if (inputEmail.value.length > 80) {
-            inputEmail.setCustomValidity("Email moet niet langer dan 80 tekens zijn!");
+            inputEmail.setCustomValidity("Email mag niet langer dan 80 tekens zijn!");
         } else {
             inputEmail.setCustomValidity("");
         }
     }
 
+    const validatePhone = () => {
+        //todo
+    }
+
     const validateForm = () => {
         validateEmail();
+        validateFirstName();
+        validateLastName();
+        validatePhone();
     }
 
     // Event listener voor email
@@ -111,7 +131,4 @@
                 // Verwerk fouten hier
             });
     });
-
-
-
 </script>

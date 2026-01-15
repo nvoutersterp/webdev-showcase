@@ -47,7 +47,7 @@
     const inputPhone = document.getElementById('phone')
 
     const validateFirstName = () => {
-       if (inputFirstName.validity.length > 60) {
+       if (inputFirstName.validity.length > 5) {
            inputFirstName.setCustomValidity("Voornaam mag niet langer dan 60 tekens zijn!");
        } else 
            inputFirstName.setCustomValidity("");

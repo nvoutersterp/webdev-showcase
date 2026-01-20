@@ -54,7 +54,11 @@
     }
 
     const validateLastName = () => {
-        //todo
+        if (inputLastName.validity.lenght < 5) {
+            inputLastName.setCustomValidity("Achternaam mag niet korter dan 2 tekens zijn!");
+        } else {
+            inputLastName.setCustomValidity("");
+        }
     }
 
     const validateEmail = () => { 
@@ -69,13 +73,21 @@
     }
 
     const validatePhone = () => {
-        //todo
+        if (inputPhone.validity.typeMismatch) {
+            inputPhone.setCustomValidity("Voer een geldig telefoonnummer in!");
+            inputPhone.reportValidity();
+        } else if (inputPhone.value.length > 20) { //todo: check max value with criteria
+            inputPhone.setCustomValidity("Telefoonnummer mag niet langer dan 20 tekens zijn!");
+        }
+        else {
+            inputPhone.setCustomValidity("");
+        }
     }
 
     const validateForm = () => {
-        validateEmail();
         validateFirstName();
         validateLastName();
+        validateEmail();
         validatePhone();
     }
 
@@ -83,6 +95,8 @@
     // Aanbevolen events voor formulieren: https://github.com/Windesheim-HBO-ICT/client_studenten/blob/main/lessen/week-2/les-1/form-constraint-validation-api/studentversie/events-voor-invoer-validatie.md
     inputEmail.addEventListener("blur", validateEmail);
     inputEmail.addEventListener("input", validateEmail);
+    inputPhone.addEventListener("input", validatePhone);
+    inputPhone.addEventListener("blur", validatePhone);
 
     // Selecteer het formelement
     const form = document.querySelector('.form-contactpagina');
@@ -93,7 +107,7 @@
 
        // Valideer alle velden voor de zekerheid
         validateForm();
-
+        
         // Verkrijg CSRF-token van het formulier
         const csrfToken = document.querySelector('input[name="__RequestVerificationToken"]').value;
 

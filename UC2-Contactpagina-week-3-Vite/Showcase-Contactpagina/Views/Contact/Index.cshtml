@@ -8,6 +8,7 @@
 
         <h1>Contact</h1>
         <p>@ViewBag.Message</p>
+        <p id="messagebox"></p>
         <form method="post" class="form-contactpagina">
 
             <div class="form-contactpagina__inputelement fx-col">
@@ -45,6 +46,7 @@
     const inputLastName = document.getElementById('lastname')
     const inputEmail = document.getElementById('email');
     const inputPhone = document.getElementById('phone')
+    const messageBox = document.getElementById('messagebox')
 
     const validateFirstName = () => {
        if (inputFirstName.validity.length > 5) {
@@ -65,7 +67,7 @@
         if (inputEmail.validity.typeMismatch) {
             inputEmail.setCustomValidity("Voer een geldig e-mailadres in!");
             inputEmail.reportValidity();
-        } else if (inputEmail.value.length > 80) {
+        } else if (inputEmail.value.length < 80) {
             inputEmail.setCustomValidity("Email mag niet langer dan 80 tekens zijn!");
         } else {
             inputEmail.setCustomValidity("");
@@ -135,7 +137,8 @@
             .then(data => {
                 // Verwerk succesvolle formulierinzending
                 console.log('Formulier succesvol ingediend:', data);
-                // Optioneel: je kunt hier een redirect uitvoeren of een succesbericht tonen
+                // todo: je kunt hier een redirect uitvoeren of een succesbericht tonen
+                messageBox.textContent = "new text"
             })
             .catch(error => {
                 console.error('Er was een probleem met de formulierinzending:', error);
